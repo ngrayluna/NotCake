@@ -1,0 +1,26 @@
+<annotation>
+	<folder>imgs_processed</folder>
+	<filename>cake_00000089.jpg</filename>
+	<path>/Users/Luna/Desktop/NotCake/imgs_processed/cake_00000089.jpg</path>
+	<source>
+		<database>Unknown</database>
+	</source>
+	<size>
+		<width>400</width>
+		<height>400</height>
+		<depth>3</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>cake</name>
+		<pose>Unspecified</pose>
+		<truncated>1</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>104</xmin>
+			<ymin>43</ymin>
+			<xmax>332</xmax>
+			<ymax>400</ymax>
+		</bndbox>
+	</object>
+</annotation>
