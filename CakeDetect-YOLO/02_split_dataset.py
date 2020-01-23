@@ -99,6 +99,7 @@ def copyMoveAnnotations(fileNames:str, inputDirectory:str, outputDirectory:str):
 
 			# Copy annotation to separate folder
 			copyfile(source, dst)
+
 		else:
 			trueOutputDir = './images/train_annot/'
 
@@ -107,7 +108,6 @@ def copyMoveAnnotations(fileNames:str, inputDirectory:str, outputDirectory:str):
 
 			# Copy annotation to separate folder
 			copyfile(source, dst)
-		
 
 
 # Create the parser
@@ -149,7 +149,7 @@ def main(args):
 	# Declare split ratio
 	##########################################
 	## TO DO: Put into configuration file
-	split_train = .75
+	split_train = .80
 	##########################################
 
 	# Compute split ratio
@@ -161,8 +161,6 @@ def main(args):
 
 	# Create directory(s) to store train, val, and annotation files
 	directoryPaths = createTrainValDir(imageDir)
-
-	print(directoryPaths)
 
 	# Read in 'x' number of files into train, validation folders
 	copyMoveFiles(trainFileNames, procImgs, directoryPaths[0])
