@@ -219,20 +219,11 @@ def main():
 	# rescale images
 
 	# Create the base model from the pre-trained model MobileNet V2
-	yolo = YOLO(backend = '', input_size = '', labels = '', max_box_per_image = '', anchors = '')
-
-
-	base_model = tf.keras.applications.MobileNetV2(input_shape=IMG_SHAPE,
-		include_top=False,
-		weights='imagenet')
-
-	# Freeze convoltional base
-	base_model.trainable = False
-
-	# Let's look at the summary
-	base_model.summary()
-
-	# Add Classifier on top
+	yolo = YOLO(backend = '',\
+		input_size = '',\
+		labels = '',\
+		max_box_per_image = '',\
+		anchors = '')
 
 	# Compile model
 
