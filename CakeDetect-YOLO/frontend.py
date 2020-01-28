@@ -19,9 +19,9 @@ from utils import decode_netout, compute_overlap, compute_ap
 from keras.applications.mobilenet import MobileNet
 from keras.layers.merge import concatenate
 from keras.optimizers import SGD, Adam, RMSprop
-from preprocessing import BatchGenerator
+from processing import BatchGenerator
 from keras.callbacks import EarlyStopping, ModelCheckpoint, TensorBoard
-from backend import TinyYoloFeature, MobileNetFeature,MobileNetFeatureV2, ResNet50Feature
+from backend import TinyYoloFeature, MobileNetFeature, MobileNetFeatureV2, ResNet50Feature
 
 
 class YOLO(object):
