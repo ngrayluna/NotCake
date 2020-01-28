@@ -21,7 +21,7 @@ from keras.layers.merge import concatenate
 from keras.optimizers import SGD, Adam, RMSprop
 from preprocessing import BatchGenerator
 from keras.callbacks import EarlyStopping, ModelCheckpoint, TensorBoard
-from backend import TinyYoloFeature, MobileNetFeature, ResNet50Feature
+from backend import TinyYoloFeature, MobileNetFeature,MobileNetFeatureV2, ResNet50Feature
 
 
 class YOLO(object):
@@ -54,6 +54,8 @@ class YOLO(object):
      
         if backend == 'MobileNet':
             self.feature_extractor = MobileNetFeature(self.input_size)
+        elif backend == 'MobileNetFeatureV2':
+            self.feature_extractor = MobileNetFeatureV2(self.input_size)
         elif backend == 'Tiny Yolo':
             self.feature_extractor = TinyYoloFeature(self.input_size)
         elif backend == 'ResNet50':
