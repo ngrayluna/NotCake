@@ -1,6 +1,6 @@
-# NotCake
-
 <!-- <img src="./imgs/Neurons-Network_T.jpg"> -->
+
+<h1>NotCake</h1>
 
 <h2><a name="about">About</a></h2>  
 NotCake is an iOS App which uses Artificial Intelligence to detect cake using a phone’s camera. The App works by using a pretrained Convolutional Neural Network for object recognition. This is project is currently under development. And as such, the specifications will remain confidential until the App is set for early release.  
