@@ -6,8 +6,6 @@
 # ------------
 # 
 # -------------------------------------------------------------------
-
-
 import os
 import argparse
 import numpy as np
@@ -15,24 +13,29 @@ from processing import parse_annotation
 from frontend import YOLO 
 import json
 
-
-
 ## TO DO ##
 
-# See if I am using weights from ImageNet or the onedefined on the GitHub one (line 44)
+# Fix Issue:
+# AttributeError: module 'tensorflow' has no attribute 'assign_add'
+
 # Find out about anchors (see line 37)
+
 # Understand the BaseFeatureExtractor Class
+
 # Understand loss function in YOLO paper./Read Paper
 
+# Finish commenting Class in frontend.py and backend.py
 
+# https://github.com/experiencor
+# https://github.com/makatx/YOLO_ResNet/blob/master/model_continue_train.py
 
-def main(args):
+def main():
 
 	###############################
 	#   Define Parameters of Model
 	architecture 		= "MobileNetFeatureV2"  # "Tiny Yolo" or "MobileNet" or "ResNet"
 	input_size 			= 400
-	anchors 			= #
+	anchors 			= [0.57273, 0.677385, 1.87446, 2.06253, 3.33843, 5.47434, 7.88282, 3.52778, 9.77052, 9.16828]
 	max_box_per_image 	= 5
 	labels 				= ['cake']	
 
@@ -58,7 +61,7 @@ def main(args):
 	# Define parameters of the validation data
 	valid_image_folder 	= './images/valid/'
 	valid_annot_folder 	= './images/valid_annot/'
-	valid_times 		= 
+	valid_times 		= 1
 
 	###############################
 	#   Parse the annotations 

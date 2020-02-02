@@ -8,6 +8,11 @@ from keras.utils import Sequence
 import xml.etree.ElementTree as ET
 from utils import BoundBox, bbox_iou
 
+# Temp Modifications while libraries are being updated.
+# imgaug issue
+np.random.bit_generator = np.random._bit_generator
+
+
 def parse_annotation(ann_dir, img_dir, labels=[]):
     all_imgs = []
     seen_labels = {}

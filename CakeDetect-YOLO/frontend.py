@@ -1,4 +1,3 @@
-
 #!/bin/usr/python3
 # -------------------------------------------------------------------
 # Author: experiencor/keras-yolo2 with modification by NOah G. Luna
@@ -22,6 +21,10 @@ from keras.optimizers import SGD, Adam, RMSprop
 from processing import BatchGenerator
 from keras.callbacks import EarlyStopping, ModelCheckpoint, TensorBoard
 from backend import TinyYoloFeature, MobileNetFeature, MobileNetFeatureV2, ResNet50Feature
+
+# Temp Modifications while libraries are being updated.
+# TensorFlow v2 vs TensorFlow V1
+tf.to_float = lambda x: tf.cast(x, tf.float32)
 
 
 class YOLO(object):
