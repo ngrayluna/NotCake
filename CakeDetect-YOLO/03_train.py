@@ -30,6 +30,14 @@ import json
 #seen.assign_add(1.0)
 ##############
 
+argparser = argparse.ArgumentParser(
+	description='Train and validate YOLO_v2 model on any dataset')
+
+argparser.add_argument(
+	'-c',
+	'--conf',
+	help='path to configuration file')
+
 
 def main(args):
 	config = args.config
