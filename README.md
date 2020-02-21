@@ -1,4 +1,4 @@
-<img src="./imgs/medium.png">
+<img src="./imgs/small.png">
 
 <!-- <h1>NotCake</h1> -->
 
@@ -22,7 +22,7 @@ The pipeline which will be included and fully documented in this repository will
 
 * [Dependencies](#dependencies)  
 * [How to Use](#how)  
-* [Acknowledgements](*acknowledgements)
+* [Acknowledgments](*acknowledgments)
 * [Links](#links)   
 
 
@@ -44,7 +44,7 @@ Coming Soon.
 
 
 
-<h2><a name="acknowledgements">Acknowledgements</a></h2> 
+<h2><a name="acknowledgments">Acknowledgments</a></h2> 
 * [Huynh Ngoc Anh's](https://github.com/experiencor) implementation of the YOLO framework, and its associated dependencies.  
 
 
