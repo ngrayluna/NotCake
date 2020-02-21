@@ -1,11 +1,13 @@
-<!-- <img src="./imgs/Neurons-Network_T.jpg"> -->
+<img src="./imgs/medium.png">
 
-<h1>NotCake</h1>
+<!-- <h1>NotCake</h1> -->
 
 <h2><a name="about">About</a></h2>  
-NotCake is an iOS App which uses Artificial Intelligence to detect cake using a phone’s camera. The App works by using a pretrained Convolutional Neural Network for object recognition. This is project is currently under development. And as such, the specifications will remain confidential until the App is set for early release.  
+NotCake is a Flask web application that uses Artificial Intelligence to detect whether an image contains instances of cake. The application works by using a pre-trained Convolutional Neural Network for object recognition. 
 
-This repository will hold both the underlying Deep Neural Network along with the Swift 5 code used to create the application.  
+This is project is currently under development. Currently, the application can take an uploaded photo and make predictions. A future release will allow the user to take a photo with the NotCake App directly.
+
+This repository holds both the underlying Deep Neural Network along with the Flask Python and HTML files used to create the application.  
 
 
 <br>
@@ -27,16 +29,15 @@ The pipeline which will be included and fully documented in this repository will
 
 <h2><a name="dependencies">Dependencies:</a></h2>  
 
-The underlying object detection algorithm was made using Python and various Python libraries including, but not limited to: TensorFlow, Keras, Numpy, cv2, PIL, etc. A full list of libraries, and the version used, will be included upon completion of the project.  
-
+  
 <!-- All scripts are written in Python3. The following libraries (and their version) were also used:   -->
 
-<!-- * NumPy 1.15.3  
-* ObsPy 1.1.0  
-* Pandas 0.23.0  
-* Keras (on top of TensorFlow)  2.2.4  
+* Numpy                1.18.1   
+* Flask                1.1.1 
+* opencv-python        4.1.2.30
+* Keras                2.1.4  
 * TensorFlow 1.8.0  
-* Matplotlib   -->
+* Matplotlib  
 
 <h2><a name="how">How to Use</a></h2>  
 Coming Soon.

@@ -1,0 +1,47 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<div class="container" style="margin-top:10px">
+
+	
+
+    <div class= "row" style="margin-top:30px">
+
+
+		<div class="col-lg-12">
+			<p>{{ predPrint }}</p>
+		</div>
+
+
+
+      <div class="col-lg-12">
+
+		<form action="{{ url_for('objectDetect') }}" method="POST" enctype=multipart/form-data>
+			<div class="form-group">
+				<!-- <label>Select Image</label> -->
+				<div class="custom-file">
+					<input type="file" class="custom-file-input" name="image" id="image">
+					<label class="custom-file-label" for="image">Select Image...</label>
+				</div>
+			</div>
+
+			<div class= "row" style="margin-top:30px">
+				<div class="col-lg-12">
+				<!-- <form action="{{ url_for('objectDetect')}}" method="post"> -->
+				<button type="submit" class="btn btn-primary btn-lg">Predict</button>
+				</div>
+			</div>
+
+		</form>
+
+      </div>
+    </div>
+
+
+
+
+</div>
+
+{% endblock content %}
+
+
