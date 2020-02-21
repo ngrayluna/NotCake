@@ -1,3 +1,11 @@
+#! /usr/bin/env python
+# -------------------------------------------------------------------
+# Author: experiencor
+# GitHub: https://github.com/experiencor/keras-yolo2 
+#
+# -------------------------------------------------------------------
+
+
 import numpy as np
 import os
 import xml.etree.ElementTree as ET

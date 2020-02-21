@@ -1,101 +1,113 @@
-#!/bin/usr/python3
+#! /usr/bin/env python
 # -------------------------------------------------------------------
-# Author: experiencor/keras-yolo2 with  modification by Noah G. Luna
+# Author: experiencor
+# GitHub: https://github.com/experiencor/keras-yolo2 
 #
 # Description:
 # ------------
-# YOLOv2 with MobileNet backend work-in-progress.
+# Training .py script using YOLO framework. The user can specify 
+# which backend to use (e.g. MobileNet, TinyYolo, etc.). Make sure
+# the pretrained weights are in the same directory if you plan to 
+# them.
+#
 # -------------------------------------------------------------------
-import os
+
 import argparse
+import os
 import numpy as np
-from processing import parse_annotation
-from frontend import YOLO 
+from preprocessing import parse_annotation
+from frontend import YOLO
 import json
 
-####### TO DO #########
-
-# Understand loss function in YOLO paper./Read Paper
-
-# Finish commenting Class in frontend.py and backend.py
-
-# https://github.com/experiencor
-# https://github.com/makatx/YOLO_ResNet/blob/master/model_continue_train.py
-
-
-####### THINGS TO UPDATE ON ORIGINAL #######
-#tf.Print -> tf.print
-
-#seen = tf.assign_add(seen, 1.) # depecrated TensorFlow v1
-#seen.assign_add(1.0)
-##############
+os.environ["CUDA_DEVICE_ORDER"]="PCI_BUS_ID"
+os.environ["CUDA_VISIBLE_DEVICES"]="0"
 
 argparser = argparse.ArgumentParser(
-	description='Train and validate YOLO_v2 model on any dataset')
+    description='Train and validate YOLO_v2 model on any dataset')
 
 argparser.add_argument(
-	'-c',
-	'--conf',
-	help='path to configuration file')
+    '-c',
+    '--conf',
+    help='path to configuration file')
 
+def _main_(args):
+    config_path = args.conf
 
-def main(args):
-	config = args.config
+    with open(config_path) as config_buffer:    
+        config = json.loads(config_buffer.read())
 
-	
-	# parse annotations of the training set
-	train_imgs, train_labels = parse_annotation(ann_dir = config['train']['train_annot_folder'], 
-		img_dir = config['train']['train_image_folder'], 
-		labels = config['model']['labels'])
+    ###############################
+    #   Parse the annotations 
+    ###############################
 
-	# parse annotations of the validation set
-	valid_imgs, valid_labels = parse_annotation(ann_dir = config['valid']['valid_annot_folder'], 
-		img_dir = config['valid']['valid_image_folder'], 
-		labels = config['model']['labels'])    
+    # parse annotations of the training set
+    train_imgs, train_labels = parse_annotation(config['train']['train_annot_folder'], 
+                                                config['train']['train_image_folder'], 
+                                                config['model']['labels'])
 
-	###############################
-	#   Construct the model
-	###############################
+    # parse annotations of the validation set, if any, otherwise split the training set
+    if os.path.exists(config['valid']['valid_annot_folder']):
+        valid_imgs, valid_labels = parse_annotation(config['valid']['valid_annot_folder'], 
+                                                    config['valid']['valid_image_folder'], 
+                                                    config['model']['labels'])
+    else:
+        train_valid_split = int(0.8*len(train_imgs))
+        np.random.shuffle(train_imgs)
 
-	# Define yolo instance from YOLO Class
-    yolo = YOLO(backend         = config['model']['backend'],
-			input_size          = config['model']['input_size'], 
-			labels              = config['model']['labels'], 
-			max_box_per_image   = config['model']['max_box_per_image'],
-			anchors             = config['model']['anchors'])
+        valid_imgs = train_imgs[train_valid_split:]
+        train_imgs = train_imgs[:train_valid_split]
 
+    if len(config['model']['labels']) > 0:
+        overlap_labels = set(config['model']['labels']).intersection(set(train_labels.keys()))
 
-	###############################
-	#   Load the pretrained weights (if any)
-	###############################
+        print('Seen labels:\t', train_labels)
+        print('Given labels:\t', config['model']['labels'])
+        print('Overlap labels:\t', overlap_labels)           
+
+        if len(overlap_labels) < len(config['model']['labels']):
+            print('Some labels have no annotations! Please revise the list of labels in the config.json file!')
+            return
+    else:
+        print('No labels are provided. Train on all seen labels.')
+        config['model']['labels'] = train_labels.keys()
+        
+    ###############################
+    #   Construct the model 
+    ###############################
+
+    yolo = YOLO(backend             = config['model']['backend'],
+                input_size          = config['model']['input_size'], 
+                labels              = config['model']['labels'], 
+                max_box_per_image   = config['model']['max_box_per_image'],
+                anchors             = config['model']['anchors'])
+
+    ###############################
+    #   Load the pretrained weights (if any) 
+    ###############################    
 
     if os.path.exists(config['train']['pretrained_weights']):
-		print("Loading pre-trained weights in", config['train']['pretrained_weights'])
-		yolo.load_weights(config['train']['pretrained_weights'])
+        print("Loading pre-trained weights in", config['train']['pretrained_weights'])
+        yolo.load_weights(config['train']['pretrained_weights'])
 
+    ###############################
+    #   Start the training process 
+    ###############################
 
-	###############################
-	#   Start Training
-	###############################
-
-	yolo.train(train_imgs         = train_imgs,
-				valid_imgs         = valid_imgs,
-				train_times        = config['train']['train_times'],
-				valid_times        = config['valid']['valid_times'],
-				nb_epochs          = config['train']['nb_epochs'], 
-				learning_rate      = config['train']['learning_rate'], 
-				batch_size         = config['train']['batch_size'],
-				warmup_epochs      = config['train']['warmup_epochs'],
-				object_scale       = config['train']['object_scale'],
-				no_object_scale    = config['train']['no_object_scale'],
-				coord_scale        = config['train']['coord_scale'],
-				class_scale        = config['train']['class_scale'],
-				saved_weights_name = config['train']['saved_weights_name'],
-				debug              = config['train']['debug'])
-
-
-
+    yolo.train(train_imgs         = train_imgs,
+               valid_imgs         = valid_imgs,
+               train_times        = config['train']['train_times'],
+               valid_times        = config['valid']['valid_times'],
+               nb_epochs          = config['train']['nb_epochs'], 
+               learning_rate      = config['train']['learning_rate'], 
+               batch_size         = config['train']['batch_size'],
+               warmup_epochs      = config['train']['warmup_epochs'],
+               object_scale       = config['train']['object_scale'],
+               no_object_scale    = config['train']['no_object_scale'],
+               coord_scale        = config['train']['coord_scale'],
+               class_scale        = config['train']['class_scale'],
+               saved_weights_name = config['train']['saved_weights_name'],
+               debug              = config['train']['debug'])
 
 if __name__ == '__main__':
-	args = argparser.parse_args()
-	main(args)
+    args = argparser.parse_args()
+    _main_(args)

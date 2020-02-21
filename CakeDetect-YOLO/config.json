@@ -1,0 +1,41 @@
+{
+    "model" : {
+        "backend"           :  "MobileNet",
+        "input_size"        :  400,
+        "image_h"           :  400,
+        "image_w"           :  400,
+        "anchors"           :  [3.36,3.10, 6.69,7.64, 9.43,6.33, 9.60,9.15, 11.44,10.95],
+        "max_box_per_image" :  10,        
+        "labels"            :  ["cake"],
+        "box"               :   5,
+        "grid_h"            :   12,
+        "grid_w"            :   12,
+        "true_box_buffer"   :   50
+
+    },
+
+    "train": {
+        "train_image_folder":   "./images/train/",
+        "train_annot_folder":   "./images/train_annot/",
+        "pretrained_weights":   "./model_weights/mobilenet_backend.h5",
+
+        "learning_rate"     :  1e-4,
+        "batch_size"        :  16,
+        "warmup_epochs"     :  3,
+        "object_scale"      :  1.0,
+        "no_object_scale"   :  5.0,
+        "coord_scale"       :  1.0,
+        "class_scale"       :  1.0,
+        "train_times"       :   10,
+        "nb_epochs"         :   50,
+        
+        "saved_weights_name":  "bestModel.h5",
+        "debug"             :  true
+
+    },
+    "valid": {
+        "valid_image_folder": 	"./images/valid/",
+        "valid_annot_folder": 	"./images/valid_annot/",
+        "valid_times"       :   1
+    }
+}
