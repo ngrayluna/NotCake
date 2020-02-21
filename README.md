@@ -5,16 +5,15 @@
 <h2><a name="about">About</a></h2>  
 NotCake is a Flask web application that uses Artificial Intelligence to detect whether an image contains instances of cake. The application works by using a pre-trained Convolutional Neural Network for object recognition. 
 
-This is project is currently under development. Currently, the application can take an uploaded photo and make predictions. A future release will allow the user to take a photo with the NotCake App directly.
+This is project is currently under development. Currently, the application can take an uploaded photo and make predictions. A future release will allow the user to take a photo with the NotCake App directly.  
 
-This repository holds both the underlying Deep Neural Network along with the Flask Python and HTML files used to create the application.  
+This repository holds both the underlying Deep Neural Network along with the Flask Python and HTML files used to create the application.    
 
 
-<br>
-The pipeline which will be included and fully documented in this repository will consist of:
+The pipeline which will be included and fully documented in this repository will consist of:  
 
-<br>
-<b>How to Downloading Image Data</b> --> <b>Pre-Processing & Formatting</b> --> <b>Defining a Model</b> --> <b>Compiling a the Deep Neural Network</b> --> <b>Training</b> 
+
+<b>How to Downloading Image Data</b> --> <b>Pre-Processing & Formatting</b> --> <b>Defining a Model</b> --> <b>Compiling a the Deep Neural Network</b> --> <b>Training</b>  
 
 
 
