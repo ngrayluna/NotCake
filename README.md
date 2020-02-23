@@ -17,9 +17,6 @@ The pipeline which will be included and fully documented in this repository will
 <b>How to Downloading Image Data</b> --> <b>Pre-Processing & Formatting</b> --> <b>Defining a Model</b> --> <b>Compiling a the Deep Neural Network</b> --> <b>Training</b>  
 
 
-<img src="./imgs/HomeImage.png">
-
-
 <h2>Table of Contents</h2>  
 
 * [Dependencies](#dependencies)  
@@ -53,6 +50,7 @@ You’re all set. Next run:
 python app.py
 ```
 
+<img src="./imgs/HomeImage.png">
 
 <h2><a name="acknowledgments">Acknowledgments</a></h2> 
 * [Huynh Ngoc Anh's](https://github.com/experiencor) implementation of the YOLO framework, and its associated dependencies.  
