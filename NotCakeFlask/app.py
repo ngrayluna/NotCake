@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, url_for
 from model import predict
 from keras.applications.inception_v3 import *
 from keras.preprocessing import image
@@ -12,6 +12,8 @@ global graph
 
 app = Flask(__name__)
 
+app.config["IMAGE_UPLOAD"] = './imageDetect' # Store in a separate config file?
+
 
 @app.route("/")
 @app.route("/home")
@@ -22,37 +24,13 @@ def home():
 @app.route("/about")
 def about():
 	tabName = 'About'
-	return render_template("./about.html", title='NotCake - '+ tabName, page_name='About the Developer')
+	return render_template("./about.html", title='NotCake - '+ tabName, page_name='About')
 
+@app.route("/howto")
+def howto():
+	tabName = 'How To'
+	return render_template("./howto.html",  title='NotCake - '+ tabName, page_name='How To Use NotCake')
 
-# Something is wrong with the 'methods=['POST']' thing.
-# @app.route("/objectDetect", methods=['POST'])
-# need to reset graph so it doesn't get weird....?
-
-###### WILL PRINT RESULTS ######
-# @app.route("/objectDetect")
-# def objectDetect():
-
-# 	tabName   = 'Cake Detection'
-# 	page_name = 'Detection Cake'
-
-# 	image_name = 'strawCake.jpg'
-# 	path   = './imgTest/strawCake.jpg'
-
-# 	classes, acc = predict(path)
-# 	predPrint = "{} was found with {} confidence.".format(classes[0], acc[0])
-# 	print(predPrint)
-
-# 	return render_template("./objectDetect.html", title='NotCake - '+ tabName, page_name='Detection Cake', image_name=image_name, predPrint=predPrint)
-# 	#return render_template("./objectDetect.html", title='NotCake - '+ tabName, page_name=page_name, image_name=image_name)
-
-
-
-## TO DO ##
-# one approch: take image, save, then read in
-# second appraoch: take image, keep in memory, then upload <-
-
-app.config["IMAGE_UPLOAD"] = './imgTest' # Store in a separate config file?
 
 @app.route("/objectDetect", methods=["GET","POST"])
 def objectDetect():
@@ -61,22 +39,31 @@ def objectDetect():
 	page_name = 'Detection Cake'
 
 	if request.method == "POST":
+
+		# TO DO: check that we only get .jpg files
 		if request.files:
 			image = request.files["image"]
-
-			print(request.files['image'])
-			print(request.full_path)
-			
-			
+						
 			path = os.path.join(app.config["IMAGE_UPLOAD"], image.filename)
-			print(path)
-
-			# path = request.files["path"]
 			classes, acc = predict(path)
-			predPrint = "{} was found with {} confidence.".format(classes[0], acc[0])
-			return render_template("./objectDetect.html", title='NotCake - '+ tabName, page_name='Detection Cake', predPrint=predPrint)
 			
-			#return render_template("./objectDetect.html", title='NotCake - '+ tabName, page_name=page_name, predPrint=image)
+			isCake = False
+			if acc[0] > 0.5 and classes[0]=='bakery':
+				isCake = True
+				predPrint = 'This is Cake!'
+				cakeReturn = 'images/cafe-chocolate-cake.jpg' # TMP
+			else:
+				predPrint = 'The cake is a lie!'
+				cakeReturn = '../static/images/cakelie.png'
+			
+			#print(request.files['image']) # print to terminal
+			#print("Class predicted {} with accuracy {}".format(classes[0], acc[0]))
+
+			imagePopUp = url_for('static', filename=cakeReturn)
+ 
+			return render_template("./objectDetect.html", title='NotCake - '+ tabName, page_name='Detection Cake',\
+				imagePopUp=imagePopUp, predPrint=predPrint)
+	
 
 
 	if request.method == "GET":
