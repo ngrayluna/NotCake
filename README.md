@@ -40,8 +40,16 @@ The pipeline which will be included and fully documented in this repository will
 * Matplotlib  
 
 <h2><a name="how">How to Use</a></h2>  
-Coming Soon.
 
+First, make sure you have all the right dependencies. 
+
+Second, upload your images into the “imageDetect” folder (this is only temporary). 
+
+You’re all set. Next run:
+
+```python
+python app.py
+```
 
 
 <h2><a name="acknowledgments">Acknowledgments</a></h2> 
