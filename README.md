@@ -17,6 +17,8 @@ The pipeline which will be included and fully documented in this repository will
 <b>How to Downloading Image Data</b> --> <b>Pre-Processing & Formatting</b> --> <b>Defining a Model</b> --> <b>Compiling a the Deep Neural Network</b> --> <b>Training</b>  
 
 
+<img src="./imgs/HomeImage.png">
+
 
 <h2>Table of Contents</h2>  
 
