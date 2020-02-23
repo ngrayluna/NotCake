@@ -1,4 +1,6 @@
-<img src="./imgs/small.png">
+
+<img src="./imgs/NotCakeLogoOff.png">
+<!-- <img src="./imgs/small.png"> -->
 
 <!-- <h1>NotCake</h1> -->
 
